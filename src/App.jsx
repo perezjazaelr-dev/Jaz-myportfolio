@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Typewriter from 'typewriter-effect';
+import Chatbot from './components/Chatbot';
 import './index.css';
 
 const fadeIn = {
@@ -146,10 +147,18 @@ function App() {
 
   const projects = [
     {
-      title: "SK Namayan Web Portal",
+      title: "SK Next App",
       desc: "The official web portal and management system for the Sangguniang Kabataan of Brgy. Namayan.",
       tags: ["React", "Laravel"],
-      link: "https://sknamayan.com/"
+      link: "https://sknamayan.com/",
+      image: "/sk-next-app.png"
+    },
+    {
+      title: "Feast 'n Delight",
+      desc: "An authentic Filipino Bilao package ordering website offering fresh and customizable food packages.",
+      tags: ["React", "Tailwind CSS", "Vite"],
+      link: "https://feastndelightsbilaopackages.netlify.app/",
+      image: "/feast-delight.png"
     }
   ];
 
@@ -226,7 +235,7 @@ function App() {
             <p className="hero-desc">
               I build high-performance trading systems, ninja-fast bots, and premium web applications. I bridge the gap between algorithmic logic and seamless user experiences.
             </p>
-            <a href="mailto:perezjazaelr@gmail.com" className="hero-btn">
+            <a href="/Jazael_Perez_Resume.pdf" download="Jazael_Perez_Resume.pdf" className="hero-btn">
               DOWNLOAD RESUME
             </a>
           </motion.section>
@@ -257,7 +266,7 @@ function App() {
                   I am a fresh graduate with a <span>Bachelor of Science in Information Technology</span> from <span>Rizal Technological University</span>.
                 </p>
                 <p className="about-text">
-                  Whether I'm scraping real estate data, integrating APIs, or developing full-scale web portals for local government units, my goal is always the same: to create scalable, efficient, and user-centric solutions. 
+                  As a passionate Front-End Developer, I thrive on turning complex problems into elegant, intuitive interfaces. I specialize in modern web technologies, creating responsive, high-performance applications that users love to interact with.
                 </p>
                 <p className="about-text">
                   My ultimate goal is to craft pixel-perfect, highly interactive user interfaces and build <span>seamless web experiences</span> that leave a lasting impact.
@@ -294,7 +303,7 @@ function App() {
             <h2 className="section-title"><BriefcaseIcon /> EXPERIENCE</h2>
             <div className="timeline">
               {experiences.map((exp, i) => (
-                <div className="timeline-item glow-card" key={i} onMouseMove={handleCardMouseMove}>
+                <div className="timeline-item" key={i}>
                   <div className="timeline-date">{exp.date}</div>
                   <h3 className="timeline-role">{exp.role}</h3>
                   <a href={exp.link} target="_blank" rel="noreferrer" className="timeline-company">
@@ -312,10 +321,11 @@ function App() {
             <div className="projects-grid">
               {projects.map((proj, i) => (
                 <a href={proj.link} target="_blank" rel="noreferrer" className="project-card glow-card" key={i} onMouseMove={handleCardMouseMove}>
-                  <div className="project-header">
-                    <TerminalIcon />
-                    <ExternalLinkIcon />
-                  </div>
+                  {proj.image && (
+                    <div className="project-image">
+                      <img src={proj.image} alt={proj.title} />
+                    </div>
+                  )}
                   <h3 className="project-title">{proj.title}</h3>
                   <p className="project-desc">{proj.desc}</p>
                   <div className="project-tags">
@@ -334,6 +344,8 @@ function App() {
           <p>© {new Date().getFullYear()} Jazael Perez.</p>
         </footer>
       </div>
+      
+      <Chatbot />
     </>
   );
 }
