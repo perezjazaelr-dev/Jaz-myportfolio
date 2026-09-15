@@ -270,10 +270,10 @@ a:hover {
   text-align: center;
 }
 
-.profile-circle {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
+.profile-image {
+  width: 200px;
+  height: 260px;
+  border-radius: 16px;
   background: linear-gradient(135deg, var(--card-border), rgba(45, 212, 191, 0.1));
   border: 2px solid var(--accent-1);
   margin-bottom: 24px;
@@ -333,6 +333,7 @@ a:hover {
   flex-direction: column;
   gap: 16px;
   position: relative;
+  padding-top: 40px; /* Space for tooltips */
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
@@ -344,11 +345,11 @@ a:hover {
 }
 
 .tech-marquee-row.left {
-  animation: scroll-left 20s linear infinite;
+  animation: scroll-left 60s linear infinite;
 }
 
 .tech-marquee-row.right {
-  animation: scroll-right 20s linear infinite;
+  animation: scroll-right 60s linear infinite;
 }
 
 .tech-marquee-row:hover {
@@ -366,24 +367,58 @@ a:hover {
 }
 
 .tech-badge {
-  padding: 10px 20px;
+  position: relative;
+  padding: 14px;
+  width: 72px;
+  height: 72px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-main);
+  border-radius: 14px;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+}
+
+.tech-badge::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: rgba(9, 9, 11, 0.9);
+  color: var(--text-main);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
   white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border);
+  z-index: 10;
+}
+
+.tech-badge:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px);
 }
 
 .tech-badge:hover {
   background: rgba(45, 212, 191, 0.1);
   border-color: var(--accent-1);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(45, 212, 191, 0.2);
+}
+
+.tech-badge svg,
+.tech-badge img {
+  width: 44px !important;
+  height: 44px !important;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 /* --- Experience Details --- */
