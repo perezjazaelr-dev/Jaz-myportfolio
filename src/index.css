@@ -89,23 +89,31 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 40;
+  background: rgba(9, 9, 11, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.nav-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
-  padding: 16px 0;
-  background: rgba(9, 9, 11, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--card-border);
-  margin-bottom: 40px;
 }
 
 @media (min-width: 768px) {
   .top-nav {
-    justify-content: space-between;
-    padding: 24px 0;
     margin-bottom: 64px;
+  }
+  .nav-content {
+    justify-content: space-between;
+    padding: 24px;
   }
 }
 
@@ -318,11 +326,43 @@ a:hover {
   font-weight: 500;
 }
 
-/* --- Tech Stack Grid --- */
-.tech-grid {
+/* --- Tech Stack Marquee --- */
+.tech-marquee-container {
+  overflow: hidden;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 16px;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.tech-marquee-row {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+}
+
+.tech-marquee-row.left {
+  animation: scroll-left 20s linear infinite;
+}
+
+.tech-marquee-row.right {
+  animation: scroll-right 20s linear infinite;
+}
+
+.tech-marquee-row:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 8px)); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(calc(-50% - 8px)); }
+  100% { transform: translateX(0); }
 }
 
 .tech-badge {
@@ -337,9 +377,8 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
 }
-
-
 
 .tech-badge:hover {
   background: rgba(45, 212, 191, 0.1);
@@ -502,4 +541,34 @@ a:hover {
   color: var(--text-muted);
   border-top: 1px solid var(--card-border);
   margin-top: 40px;
+}
+
+/* --- Dynamic Cursor Glow --- */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(
+    400px circle at var(--card-x, 50%) var(--card-y, 50%),
+    rgba(45, 212, 191, 0.15),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+.timeline-item > *, .project-card > * {
+  position: relative;
+  z-index: 1;
 }

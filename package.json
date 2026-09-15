@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "framer-motion": "^13.3.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-github-calendar": "^5.0.8"
+    "react-github-calendar": "^5.0.8",
+    "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",

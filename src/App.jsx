@@ -1,5 +1,16 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import Typewriter from 'typewriter-effect';
 import './index.css';
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: "easeOut" } 
+  }
+};
 
 const GithubIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
@@ -14,11 +25,15 @@ const InstagramIcon = () => (
 );
 
 const ExternalLinkIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
 );
 
 const TerminalIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 18 22 12 16 6"></polyline>
+    <polyline points="8 6 2 12 8 18"></polyline>
+    <line x1="14" y1="4" x2="10" y2="20"></line>
+  </svg>
 );
 
 const UserIcon = () => (
@@ -57,11 +72,14 @@ const PhpIcon = () => (
 const LaravelIcon = () => (
   <svg viewBox="0 0 128 128" width="16" height="16"><path fill="#ff2d20" d="M110.1 35.8L66.7 10.7a5.5 5.5 0 00-5.4 0L17.9 35.8a5.5 5.5 0 00-2.7 4.7v50c0 2 1 3.8 2.7 4.7l43.4 25.1a5.5 5.5 0 005.4 0l43.4-25.1a5.5 5.5 0 002.7-4.7v-50c0-1.9-1-3.8-2.7-4.7z"/><path fill="#fff" d="M83.6 47.9H37.3l26.6 26.6h19.7L83.6 47.9zM64 104.7v-54l-26.7-24v64.6a5.5 5.5 0 002.7 4.7L64 104.7zM90.7 76.6V39.9L69.3 61.2h21.4z"/></svg>
 );
-const ApiIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+const HtmlIcon = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#E34F26" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l1.5 13 6.5 3 6.5-3 1.5-13z" /><path d="M7.5 8h9l-1 8-3.5 1-3.5-1-.25-2.5" /></svg>
 );
-const GlobeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+const CssIcon = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#1572B6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l1.5 13 6.5 3 6.5-3 1.5-13z" /><path d="M7.5 8h9l-1 8-3.5 1-3.5-1-.25-2.5" /></svg>
+);
+const JavaScriptIcon = () => (
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#F7DF1E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M9 8v8M15 16c-2 0-3-1-3-3" /></svg>
 );
 const FigmaIcon = () => (
   <svg viewBox="0 0 128 128" width="16" height="16"><path fill="#f24e1e" d="M38.8 63.9h25v33.4a12.5 12.5 0 01-25 0V63.9z"/><path fill="#ff7262" d="M38.8 30.5h25v33.4h-25z"/><path fill="#1abcfe" d="M63.8 63.9h25.1a16.7 16.7 0 01-16.7 16.7 16.7 16.7 0 01-8.4-33.4z"/><path fill="#0acf83" d="M63.8 30.5v33.4h25.1a16.7 16.7 0 000-33.4H63.8z"/><path fill="#a259ff" d="M38.8 30.5A16.7 16.7 0 0163.8 30.5v33.4A16.7 16.7 0 0138.8 30.5z"/></svg>
@@ -69,6 +87,14 @@ const FigmaIcon = () => (
 
 function App() {
   const [activeSection, setActiveSection] = useState('about');
+
+  const handleCardMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--card-x', `${x}px`);
+    e.currentTarget.style.setProperty('--card-y', `${y}px`);
+  };
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -124,24 +150,6 @@ function App() {
       desc: "The official web portal and management system for the Sangguniang Kabataan of Brgy. Namayan.",
       tags: ["React", "Laravel"],
       link: "https://sknamayan.com/"
-    },
-    {
-      title: "Crypto Scanner Bot",
-      desc: "Real-time market scanner with Telegram alerts, ninja-fast. Continuously monitors Binance API.",
-      tags: ["Python", "Binance API"],
-      link: "https://github.com/perezjazaelr-dev"
-    },
-    {
-      title: "TradingView RSI Strategy",
-      desc: "PineScript strat with SL/TP and partial exits for max gains.",
-      tags: ["PineScript", "TradingView"],
-      link: "https://github.com/perezjazaelr-dev"
-    },
-    {
-      title: "AI Pattern Shinobi",
-      desc: "TensorFlow-powered pattern recognition for trading edges.",
-      tags: ["Python", "TensorFlow"],
-      link: "https://github.com/perezjazaelr-dev"
     }
   ];
 
@@ -154,8 +162,9 @@ function App() {
     { name: "Django", icon: <DjangoIcon /> },
     { name: "PHP", icon: <PhpIcon /> },
     { name: "Laravel", icon: <LaravelIcon /> },
-    { name: "REST APIs", icon: <ApiIcon /> },
-    { name: "Web Scraping", icon: <GlobeIcon /> },
+    { name: "HTML", icon: <HtmlIcon /> },
+    { name: "CSS", icon: <CssIcon /> },
+    { name: "JavaScript", icon: <JavaScriptIcon /> },
     { name: "Figma", icon: <FigmaIcon /> }
   ];
 
@@ -163,9 +172,9 @@ function App() {
     <>
       <div className="mouse-spotlight"></div>
       
-      <div className="layout-container">
-        {/* Top Navigation */}
-        <nav className="top-nav">
+      {/* Top Navigation */}
+      <nav className="top-nav">
+        <div className="nav-content">
           <div className="nav-logo">
             Jazael <span>Perez</span>
           </div>
@@ -195,23 +204,35 @@ function App() {
               Projects
             </div>
           </div>
-        </nav>
+        </div>
+      </nav>
 
+      <div className="layout-container">
         <main>
           {/* Hero Section */}
-          <section className="hero-section">
+          <motion.section className="hero-section" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeIn}>
             <h1 className="hero-title">Jazael Perez</h1>
-            <h2 className="hero-subtitle">Front-End & Web Developer</h2>
+            <h2 className="hero-subtitle">
+              <Typewriter
+                options={{
+                  strings: ['Front-End Developer', 'Web Developer', 'Creative Coder'],
+                  autoStart: true,
+                  loop: true,
+                  delay: 50,
+                  deleteSpeed: 30,
+                }}
+              />
+            </h2>
             <p className="hero-desc">
               I build high-performance trading systems, ninja-fast bots, and premium web applications. I bridge the gap between algorithmic logic and seamless user experiences.
             </p>
             <a href="mailto:perezjazaelr@gmail.com" className="hero-btn">
               DOWNLOAD RESUME
             </a>
-          </section>
+          </motion.section>
 
           {/* About Split Section */}
-          <section id="about" className="section-wrapper">
+          <motion.section id="about" className="section-wrapper" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeIn}>
             <h2 className="section-title"><UserIcon /> ABOUT</h2>
             <div className="about-split">
               <div className="about-left">
@@ -239,31 +260,41 @@ function App() {
                   Whether I'm scraping real estate data, integrating APIs, or developing full-scale web portals for local government units, my goal is always the same: to create scalable, efficient, and user-centric solutions. 
                 </p>
                 <p className="about-text">
-                  My ultimate quest is to build an <span>AI-powered "Aladdin"</span> to dominate markets and automation.
+                  My ultimate goal is to craft pixel-perfect, highly interactive user interfaces and build <span>seamless web experiences</span> that leave a lasting impact.
                 </p>
               </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Skills Section */}
-          <section id="skills" className="section-wrapper">
+          <motion.section id="skills" className="section-wrapper" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeIn}>
             <h2 className="section-title"><CodeIcon /> SKILLS</h2>
-            <div className="tech-grid">
-              {techStack.map((tech, i) => (
-                <div className="tech-badge" key={i}>
-                  {tech.icon}
-                  {tech.name}
-                </div>
-              ))}
+            <div className="tech-marquee-container">
+              <div className="tech-marquee-row left">
+                {[...techStack.slice(0, Math.ceil(techStack.length / 2)), ...techStack.slice(0, Math.ceil(techStack.length / 2))].map((tech, i) => (
+                  <div className="tech-badge" key={`left-${i}`}>
+                    {tech.icon}
+                    {tech.name}
+                  </div>
+                ))}
+              </div>
+              <div className="tech-marquee-row right">
+                {[...techStack.slice(Math.ceil(techStack.length / 2)), ...techStack.slice(Math.ceil(techStack.length / 2))].map((tech, i) => (
+                  <div className="tech-badge" key={`right-${i}`}>
+                    {tech.icon}
+                    {tech.name}
+                  </div>
+                ))}
+              </div>
             </div>
-          </section>
+          </motion.section>
 
           {/* Experience Section */}
-          <section id="experience" className="section-wrapper">
+          <motion.section id="experience" className="section-wrapper" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeIn}>
             <h2 className="section-title"><BriefcaseIcon /> EXPERIENCE</h2>
             <div className="timeline">
               {experiences.map((exp, i) => (
-                <div className="timeline-item" key={i}>
+                <div className="timeline-item glow-card" key={i} onMouseMove={handleCardMouseMove}>
                   <div className="timeline-date">{exp.date}</div>
                   <h3 className="timeline-role">{exp.role}</h3>
                   <a href={exp.link} target="_blank" rel="noreferrer" className="timeline-company">
@@ -273,14 +304,14 @@ function App() {
                 </div>
               ))}
             </div>
-          </section>
+          </motion.section>
 
           {/* Projects Section */}
-          <section id="projects" className="section-wrapper">
+          <motion.section id="projects" className="section-wrapper" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeIn}>
             <h2 className="section-title"><TerminalIcon /> PROJECTS</h2>
             <div className="projects-grid">
               {projects.map((proj, i) => (
-                <a href={proj.link} target="_blank" rel="noreferrer" className="project-card" key={i}>
+                <a href={proj.link} target="_blank" rel="noreferrer" className="project-card glow-card" key={i} onMouseMove={handleCardMouseMove}>
                   <div className="project-header">
                     <TerminalIcon />
                     <ExternalLinkIcon />
@@ -295,12 +326,12 @@ function App() {
                 </a>
               ))}
             </div>
-          </section>
+          </motion.section>
 
         </main>
         
         <footer className="footer">
-          <p>© {new Date().getFullYear()} Jazael Perez - Designed with React. Inspired by Iaan Mesquita.</p>
+          <p>© {new Date().getFullYear()} Jazael Perez.</p>
         </footer>
       </div>
     </>
